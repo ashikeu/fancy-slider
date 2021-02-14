@@ -22,7 +22,15 @@ const showImages = (images) => {
   images.forEach(image => {
     let div = document.createElement('div');
     div.className = 'col-lg-3 col-md-4 col-xs-6 img-item mb-2';
-    div.innerHTML = ` <img class="img-fluid img-thumbnail" onclick=selectItem(event,"${image.webformatURL}") src="${image.webformatURL}" alt="${image.tags}">`;
+    div.innerHTML = ` <img class="img-fluid img-thumbnail" onclick=selectItem(event,"${image.webformatURL}") src="${image.webformatURL}" alt="${image.tags}">
+    <center>
+    <p id="statusDiv">
+    <span id="spanStatus" class="fas fa-eye "  title="Total Views" >${image.views.toLocaleString()}</span>
+    <span id="spanStatus" class="fas fa-thumbs-up" title="Likes">${image.likes.toLocaleString()}</span>
+    <span id="spanStatus" class="fas fa-comment"  title="Comments">${image.comments.toLocaleString()}</span>
+    <span id="spanStatus" class="fas fa-download" title="Downloads">${image.downloads.toLocaleString()}</span>
+    </p>
+    </center>`;
     gallery.appendChild(div)
   });
   
@@ -34,7 +42,6 @@ const getImages = (query) => {
     .then(response => response.json())
     .then(data => showImages(data.hits))
     .catch(err => console.log(err))
-    console.log(gallery.innerHTML);
 }
 
 let slideIndex = 0;
